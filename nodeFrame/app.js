@@ -9,6 +9,13 @@ const app = express();
 var device = require('express-device'); //device 관련(device type별로 구분) 
 app.use(device.capture());
 
+/* 보안 관련 HTTP 헤더 설정 */
+const helmet = require('helmet');
+app.use(helmet());
+
+/* X-Powered-By 헤더는 사용하지 않도록 설정 */
+app.disable('x-powered-by');
+
 const usersViewRouter = require('./server/routes/viewRoutes/r_vr_users'); //user 뷰 라우터 경로
 const usersDataRouter = require('./server/routes/dataRoutes/r_dr_users'); //user 데이터 라우터
 

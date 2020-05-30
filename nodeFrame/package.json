@@ -16,6 +16,7 @@
     "express-device": "^0.4.2",
     "express-session": "^1.17.1",
     "fs": "0.0.1-security",
+    "helmet": "^3.22.0",
     "http-errors": "~1.6.3",
     "jquery": "^3.5.1",
     "memory-cache": "^0.2.0",
