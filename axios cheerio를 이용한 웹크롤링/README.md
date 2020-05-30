@@ -55,4 +55,4 @@ console.log(musicDataArr);
   크롤링시 정보를 제공하는 사이트 웹 서버의 트래픽이 증가하여 서버에 무리가 갈 수 있으니,  
   API를 통해서 정보를 가져오는게 가장 좋은 방법이다!  
   
-[데이터 출처]: https://music.naver.com/
+데이터 출처 : [네이버 뮤직](https://music.naver.com/)
