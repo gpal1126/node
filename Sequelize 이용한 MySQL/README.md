@@ -1,8 +1,8 @@
 ## sequelize란? 
 - ORM(Object Relational Mapping)의 한 종류로 객체와 데이터베이스의 관계를 매핑시켜주는 라이브러리  
 
-### 시퀄라이즈에 필요한 sequelize와 mysql2 패키지 설치하기
-​```
+### 시퀄라이즈에 필요한 sequelize와 mysql2 패키지 설치하기  
+```
 $cd nodeFrame               //해당 프로젝트로 이동
 $npm i sequelize -g sequelize-cli
 $npm i sequelize mysql2
