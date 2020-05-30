@@ -1,5 +1,5 @@
 # Node http-proxy를 이용한 포트기반 가상호스트 설정하기
-- server.js  
+- [Node http-proxy를 이용한 포트기반 가상호스트] (https://github.com/gpal1126/node_log/blob/master/vhost_port/server.js)
 
 # 프록시(Proxy)란?
 보안상으로 직접 통신할 수 없는 두 점 사이에서 중간에 대리로 통신을 수행하는 기능을 프록시라고 하며,  
