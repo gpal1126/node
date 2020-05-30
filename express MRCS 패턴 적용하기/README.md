@@ -18,7 +18,7 @@ router.get('/:id', function(req, res, next){    //로그인 여부에 따라 접
 
     //세션 체크
     mdlwrLogged.sessionChk(req, res, next);
-    
+
     //로그인 여부에 따라 접근 가능한 페이지 미들웨어 func
     ... 생략
 
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res, next){    //로그인 여부에 따라 접
 
     let deviceType = req.device.type.toUpperCase(); //device type
     if( deviceType === 'DESKTOP' ){
-        deviceType = 'web';
+        deviceType = 'pc';
     }else if( ['TABLET', 'PHONE'].includes(deviceType) ){
         deviceType = 'mobile';
     }else {

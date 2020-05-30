@@ -16,7 +16,7 @@ app.use(device.capture());
 let deviceType = req.device.type.toUpperCase(); //device type
 console.log('deviceType::::::::::::::::::::::::::::::::::::::'+deviceType);
 if( deviceType === 'DESKTOP' ){
-    deviceType = 'web';
+    deviceType = 'pc';
 }else if( ['TABLET', 'PHONE'].includes(deviceType) ){
     deviceType = 'mobile';
 }else {
