@@ -1,6 +1,6 @@
 ##  Sequelize 쿼리 작성하기
   
-#### insert   
+### insert   
 - mysql insert  
 ```
 const db = require('../db/db_base');    //db 정보
@@ -25,7 +25,7 @@ User.create({
 });
 ```
 
-#### select    
+### select    
 - select  
 ```
 const db = require('../db/db_base');    //db 정보
@@ -36,8 +36,7 @@ db.client.query(query, [user_id], function(err, rst){
 ```
 
 - sequelize select  
-    - findAll : 멀티 로우 값 select  
-                값이 없으면 빈 배열 값이 return 된다!  
+    - findAll : 멀티 row 값 select 값이 없으면 빈 배열 값이 return 된다!  
 ```
 const { User } = require('../models');  //스키마 연결
 //멀티 로우 검색시 
@@ -57,8 +56,7 @@ User.findAll({
 });
 ```
   
-- findOne : 하나의 로우 값(limit 1)  select  
-            값이 없으면 null로 return 된다!  
+    - findOne : 하나의 row 값(limit 1)  select, 값이 없으면 null로 return 된다!  
 ```
 const { User } = require('../models');  //스키마 연결
 User.findOne({
@@ -80,7 +78,7 @@ User.findOne({
 - findAll, findOne 사용하면서 값이 없을 때의 return 값이 서로 다르다.  
   
   
-#### update  
+### update  
 - mysql update  
 ```
 const db = require('../db/db_base');    //db 정보
@@ -105,7 +103,7 @@ User.update({
 ```
   
 
-#### delete 생략  
+### delete 생략  
 - 모든 정보를 로그로 남겨야 하기 때문에 delete는 사용하지 않았다.  
 - mysql delete  
 ```
@@ -128,7 +126,7 @@ User.destroy({
 });
 ```
 
-#### findOrCreate : 조회 후 값이 없으면 insert
+### findOrCreate : 조회 후 값이 없으면 insert
 - spread() : 값이 있으면 기존 값 return  
              값이 없으면 새로운 값 return  
 ```
