@@ -95,7 +95,8 @@ module.exports = multer({
 |**files**|multipart 형식 폼에서 파일 필드의 최대 개수|무제한|
 |**parts**|For multipart forms, the max number of parts (fields + files)|무제한|
 |**headerPairs**|multipart 형식 폼에서 파싱할 헤더의 key=>value 쌍의 최대 개수|2000|
-
+  
+  
 ##### * 유저 정보 수정 컨트롤러 (프로필 파일 업로드)  
 - multer 미들웨어를 두번째 인자에 넣는다.  
 - multer는 request에 body 객체(폼 텍스트 필드)와 file 객체가 담겨 있다.  
