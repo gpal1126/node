@@ -31,7 +31,7 @@ router.get('/:id', function(req, res, next){    //로그인 여부에 따라 접
     let deviceType = req.device.type.toUpperCase(); //device type
     //console.log('deviceType::::::::::::::::::::::::::::::::::::::'+deviceType);
     if( deviceType === 'DESKTOP' ){
-        deviceType = 'web';
+        deviceType = 'pc';
     }else if( ['TABLET', 'PHONE'].includes(deviceType) ){
         //deviceType = 'mobile';  //mobile 제작할시 사용
         deviceType = 'mobile';

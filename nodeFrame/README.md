@@ -7,3 +7,4 @@
 - 로그인 여부에 따라 접근 가능한 미들웨어 추가
 - 암호화 crypto/bcrypt 적용
 - env 환경변수 설정
+- device type(pc / mobile) 분기처리

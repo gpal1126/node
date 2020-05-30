@@ -6,6 +6,9 @@ const logger = require('morgan');
 
 const app = express();
 
+var device = require('express-device'); //device 관련(device type별로 구분) 
+app.use(device.capture());
+
 const usersViewRouter = require('./server/routes/viewRoutes/r_vr_users'); //user 뷰 라우터 경로
 const usersDataRouter = require('./server/routes/dataRoutes/r_dr_users'); //user 데이터 라우터
 
