@@ -55,7 +55,7 @@ User.findAll({
     //에러
 });
 ```
-  
+-   
     - findOne : 하나의 row 값(limit 1)  select, 값이 없으면 null로 return 된다!  
 ```
 const { User } = require('../models');  //스키마 연결
