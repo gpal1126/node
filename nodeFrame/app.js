@@ -9,6 +9,38 @@ const app = express();
 const usersViewRouter = require('./server/routes/viewRoutes/r_vr_users'); //user 뷰 라우터 경로
 const usersDataRouter = require('./server/routes/dataRoutes/r_dr_users'); //user 데이터 라우터
 
+/* 로그인 관련 모듈 */
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
+require('dotenv').config();   //.env 파일의 환경변수 설정 / 암호화로 처리
+
+const { sequelize } = require('./server/models');   //require('./server/models/index.js').sequelize index.js 생략
+const authRouter = require('./server/passport/auth');
+const passportConfig = require('./server/passport');      //require('./server/passport/index.js') index.js 생략
+sequelize.sync();
+passportConfig(passport);
+
+app.use(session({
+    resave: true,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,    //.env 파일에서 암호화하여 생성
+    name: 'sessionID',
+    cookie: {
+        secure: false,  // HTTPS를 통해서만 쿠키를 전송하도록
+        httpOnly: true, //클라이언트 JavaScript가 아닌 HTTP(S)를 통해서만 전송되도록
+        //domain: '', //쿠키의 도메인을 표시
+        //path : '',  //쿠키의 경로를 표시
+        //expires: expiryDate //만기 날짜를 설정
+        //maxAge: 1000 * 60 // would expire after 1 minute
+        maxAge: 1000 * 60 * 60 // would expire after 1 hours
+    },
+}));
+app.use(flash());
+app.use(passport.initialize()); //req 객체에 passport 설정을 심는다.
+app.use(passport.session());    //req.session 객체에 passport 정보 저장
+/* 로그인 관련 모듈 */
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -21,6 +53,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersViewRouter);   //유저 뷰 라우터
 app.use('/d_users', usersDataRouter); //유저 데이터 라우터
+
+app.use('/auth', authRouter); //로그인/로그아웃 라우터
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
