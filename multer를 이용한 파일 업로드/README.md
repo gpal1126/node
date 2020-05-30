@@ -87,6 +87,7 @@ module.exports = multer({
 ​  
 #### limits 옵션
 | 속성 | 설명 | 기본값 |
+|---|---|---|
 |**fieldNameSize**| 필드명 사이즈 최대값 | 100 bytes |
 |**fieldSize**|필드값 사이즈 최대값|1MB|
 |**fields**|파일형식이 아닌 필드의 최대 개수|무제한|
@@ -148,6 +149,7 @@ router.put('/modifyUserInfo', upload.single('profile'), function(req, res){
 
 
 | Key | Description | Note |
+|---|---|---|
 |**fieldname**|폼에 정의된 필드 명| |
 |**originalname**|사용자가 업로드한 파일 명| |
 |**encoding**|파일의 엔코딩 타입| |
