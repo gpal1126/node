@@ -1,7 +1,14 @@
 ## nodemailer를 이용한 이메일 발송
 - 사용 전 해당 이메일의 보안 설정 사용으로 변경해주기!  
-- https://www.google.com/settings/security/lesssecureapps
+- https://www.google.com/settings/security/lesssecureapps  
 
+
+### nodemailer 모듈 설치
+```
+$ npm i nodemailer
+```
+
+### sendEmail.js 
 ```
 const nodemailer = require('nodemailer'); //이메일 발송 관련 모듈
 
