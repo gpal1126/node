@@ -54,6 +54,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//view 단에서 사용할 path 잡아줌 ex) /js~ 나 /views~
+app.use('/views', express.static(__dirname + '/views')); //view단에서 사용할 views path 잡아줌
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist')); //npm jquery 경로 설정
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js')); //npm bootstrap js 경로 설정
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css')); //npm bootstrap css 경로 설정
+
 app.use('/users', usersViewRouter);   //유저 뷰 라우터
 app.use('/d_users', usersDataRouter); //유저 데이터 라우터
 
