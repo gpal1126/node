@@ -7,4 +7,10 @@
 - 로그인 여부에 따라 접근 가능한 미들웨어 추가
 - 암호화 crypto/bcrypt 적용
 - env 환경변수 설정
+- Express 보안 설정
 - device type(pc / mobile) 분기처리
+- upsert(createOrUpdate) function 기능 
+- multer를 이용한 파일 업로드 
+- nodemailer를 이용한 이메일 발송 추가 
+- npm 으로 jQuery/bootstrap import 설정 
+- memory-cache 추가
