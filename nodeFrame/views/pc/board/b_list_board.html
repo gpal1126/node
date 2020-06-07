@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>chinag9</title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="chinag9">
+    <meta name="author" content="SW-THEMES">
+        
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/web/porto/icons/favicon.ico">
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+
+    <!-- summernote bootstrap css -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/css/web/porto/style.css">
+    
+    <!-- semantic -->
+    <link rel="stylesheet" href="/css/web/semantic/step.css"> <!-- step css -->
+	<link rel="stylesheet" href="/css/web/semantic/semantic.css"> <!-- semantic css -->
+    <!-- semantic -->
+    
+    <!-- tui editor -->
+    <!-- tui editor dependencies -->
+    <link rel="stylesheet" href="/tui-edit-dpn/codemirror.css">
+    <link rel="stylesheet" href="/tui-edit-dpn/github.css">
+    <!-- tui editor dependencies -->
+    
+    <!-- tui editor default -->
+    <link rel="stylesheet" href="/tui-editor/tui-editor.css">
+    <link rel="stylesheet" href="/tui-editor/tui-editor-contents.css">
+
+    <!-- chart extention -->
+    <link rel="stylesheet" href="/tui-chart/tui-chart.css">
+    
+    <!-- tui editor color -->
+    <link rel="stylesheet" href="/tui-color-picker/tui-color-picker.css">
+    <!-- tui editor -->
+    
+    <!-- summernote css -->
+    <link rel="stylesheet" href="/css/web/summernote/summernote.css">
+    
+    <link rel="stylesheet" href="/css/web/board/b_list_board.css">   <!-- board list css -->
+
+    <style type="text/css">
+    .btn-group-sm>.btn, .btn-sm{
+        width: auto;
+        min-width: auto;
+        height: 32px;
+        padding: .25rem .9rem;
+        /* font-size: .875rem; */
+        line-height: 1.5;
+        border-radius: .2rem;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- header include -->
+        <header class="header header-html" include-html="/views/web/common/header.html"></header>
+        <!-- header include -->
+
+        <main class="main">
+
+            <!-- 게시판 사이드 메뉴 include -->
+            <div class="b-sidemenu-html" include-html="/views/web/common/b_sidemenu.html"></div><!-- End .col-lg-3 -->
+            <!-- 게시판 사이드 메뉴 include -->
+
+            <div class="board-container">
+                <div class="b-title"></div>
+
+                <div class="b-top-row">
+                    <!-- <div class="cnt-box">총 <span id="cnt"></span>개의 글</div>
+                    <div class="search-box">
+                        <input type="text" class="search-txt" id="searchTxt" />
+                        <span class="search-btn">검색</span>
+                    </div> -->
+                </div>
+
+                <div class="board-list">
+                    <div class="board-box">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="no">번호</th>
+                                    <th class="type">유형</th>
+                                    <th class="title">제목</th>
+                                    <th class="id">작성자</th>
+                                    <th class="regdate">작성일</th>
+                                    <th class="views">조회수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="btn-box">
+                    </div><!-- End .form-footer -->
+                </div>
+            </div><!-- End .col-md-9 -->
+        </main><!-- End .main -->
+
+        <!-- footer include -->
+        <footer class="footer footer-html" include-html="/views/web/common/footer.html"></footer>
+        <!-- footer include -->
+
+    </div><!-- End .page-wrapper -->
+
+
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+    <!-- Plugins JS File -->
+    <script type="text/javascript" src="/jquery/jquery.min.js"></script>    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/bootstrap.min.js"></script> <!-- bootstrap js -->
+    <script type="text/javascript" src="/bootstrap/bootstrap.bundle.min.js"></script> <!-- bootstrap bundle js -->
+
+    <!-- <script src="/js/bootstrap.bundle.min.js"></script> -->
+    <script src="/js/common/porto/plugins.min.js"></script>
+    
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>  -->
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
+
+    <!-- include summernote css/js -->
+
+    <!-- Main JS File -->
+    <script src="/js/common/porto/main.js"></script>
+
+    <script type="text/javascript" src="/js/common/includeHTML.js"></script>	<!-- includeHTML js -->
+    <script type="text/javascript" src="/js/common/ajax.js"></script>		<!-- ajax js -->
+    <script type="text/javascript" src="/js/common/urlParameter.js"></script>		<!-- url parameter js -->
+    <script type="text/javascript" src="/js/common/filterArray.js"></script>	<!-- filter array function -->
+    <script type="text/javascript" src="/js/common/cookies.js"></script>	<!-- cookies function -->
+    <script type="text/javascript" src="/js/common/jsonVal.js"></script>	<!-- jsonVal function -->
+    <!-- <script type="text/javascript" src="/js/web/common/header.js"></script> -->		<!-- header js -->
+    <script type="text/javascript" src="/js/web/board/b_list_board.js"></script>		<!-- board list js -->
+    <script>includeHTML();</script> 	<!--HTML include functon 호출-->
+
+</body>
+</html>

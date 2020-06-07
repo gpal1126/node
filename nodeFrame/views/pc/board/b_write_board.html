@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>chinag9</title>
+
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="chinag9">
+    <meta name="author" content="SW-THEMES">
+        
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/web/porto/icons/favicon.ico">
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+
+    <!-- summernote bootstrap css -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/css/web/porto/style.css">
+    
+    <!-- semantic -->
+    <link rel="stylesheet" href="/css/web/semantic/step.css"> <!-- step css -->
+	<link rel="stylesheet" href="/css/web/semantic/semantic.css"> <!-- semantic css -->
+    <!-- semantic -->
+    
+    <!-- tui editor -->
+    <!-- tui editor dependencies -->
+    <link rel="stylesheet" href="/tui-edit-dpn/codemirror.css">
+    <link rel="stylesheet" href="/tui-edit-dpn/github.css">
+    <!-- tui editor dependencies -->
+    
+    <!-- tui editor default -->
+    <link rel="stylesheet" href="/tui-editor/tui-editor.css">
+    <link rel="stylesheet" href="/tui-editor/tui-editor-contents.css">
+
+    <!-- chart extention -->
+    <link rel="stylesheet" href="/tui-chart/tui-chart.css">
+    
+    <!-- tui editor color -->
+    <link rel="stylesheet" href="/tui-color-picker/tui-color-picker.css">
+    <!-- tui editor -->
+    
+    <!-- summernote css -->
+    <link rel="stylesheet" href="/css/web/summernote/summernote.css">
+    
+    <link rel="stylesheet" href="/css/web/board/b_write_board.css">   <!-- write board css -->
+
+    <style type="text/css">
+    .btn-group-sm>.btn, .btn-sm{
+        width: auto;
+        min-width: auto;
+        height: 32px;
+        padding: .25rem .9rem;
+        /* font-size: .875rem; */
+        line-height: 1.5;
+        border-radius: .2rem;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- header include -->
+        <header class="header header-html" include-html="/views/web/common/header.html"></header>
+        <!-- header include -->
+
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">로그인</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="heading">
+                            <h2 class="title">게시판</h2>
+                            <!-- <p>글을 작성해보세요.</p> -->
+                        </div><!-- End .heading -->
+
+                        <div class="board-form">
+
+                             <!-- tui editor -->
+                            <!-- <div id="editSection"></div> -->
+
+                            <div class="b-box name-box">
+                                <span class="b-title">작성자</span>
+                                <span class="b-txt name" id="name"></span>
+                            </div>
+
+                            <hr class="line" />
+
+                            <div class="b-box title-box">
+                                <span class="b-title">제목</span>
+                                <input type="text" class="title" id="title" />
+                            </div>
+
+                            <!-- summernote editor -->
+                            <div id="summernote"></div>
+
+                            <div class="b-box hidden-box" style="display: none;">
+                                <span class="b-title">비밀글</span>
+                                <label> 
+                                    <input type="checkbox" class="hiddenStatus" id="hiddenStatus" />
+                                    체크시 작성자와 관리자만 볼 수 있습니다.
+                                </label>
+                            </div>
+
+                            <hr class="line" />
+
+                            <div class="btn-box">
+                                <button class="btn-board btn bg-secondary" id="cancel">취소</button>
+                                <button class="btn-board btn bg-primary" id="confirm" >등록</button>
+                            </div><!-- End .form-footer -->
+                        </div>
+                    </div><!-- End .col-md-9 -->
+
+                    <!-- 게시판 사이드 메뉴 include -->
+                    <div class="b-sidemenu-html col-lg-3 order-lg-first" include-html="/views/web/common/b_sidemenu.html"></div><!-- End .col-lg-3 -->
+                    <!-- 게시판 사이드 메뉴 include -->
+
+                    
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+
+            <div class="mb-5"></div><!-- margin -->
+        </main><!-- End .main -->
+
+        <!-- footer include -->
+        <footer class="footer footer-html" include-html="/views/web/common/footer.html"></footer>
+        <!-- footer include -->
+
+    </div><!-- End .page-wrapper -->
+
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-cancel"></i></span>
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="category.html">Categories</a>
+                        <ul>
+                            <li><a href="category-banner-full-width.html">Full Width Banner</a></li>
+                            <li><a href="category-banner-boxed-slider.html">Boxed Slider Banner</a></li>
+                            <li><a href="category-banner-boxed-image.html">Boxed Image Banner</a></li>
+                            <li><a href="category-sidebar-left.html">Left Sidebar</a></li>
+                            <li><a href="category-sidebar-right.html">Right Sidebar</a></li>
+                            <li><a href="category-flex-grid.html">Product Flex Grid</a></li>
+                            <li><a href="category-horizontal-filter1.html">Horizontal Filter 1</a></li>
+                            <li><a href="category-horizontal-filter2.html">Horizontal Filter 2</a></li>
+                            <li><a href="#">Product List Item Types</a></li>
+                            <li><a href="category-infinite-scroll.html">Ajax Infinite Scroll<span class="tip tip-new">New</span></a></li>
+                            <li><a href="category-3col.html">3 Columns Products</a></li>
+                            <li><a href="category-4col.html">4 Columns Products</a></li>
+                            <li><a href="category-5col.html">5 Columns Products</a></li>
+                            <li><a href="category-6col.html">6 Columns Products</a></li>
+                            <li><a href="category-7col.html">7 Columns Products</a></li>
+                            <li><a href="category-8col.html">8 Columns Products</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="product.html">Products</a>
+                        <ul>
+                            <li>
+                                <a href="#">Variations</a>
+                                <ul>
+                                    <li><a href="product.html">Horizontal Thumbnails</a></li>
+                                    <li><a href="product-full-width.html">Vertical Thumbnails<span class="tip tip-hot">Hot!</span></a></li>
+                                    <li><a href="product.html">Inner Zoom</a></li>
+                                    <li><a href="product-addcart-sticky.html">Addtocart Sticky</a></li>
+                                    <li><a href="product-sidebar-left.html">Accordion Tabs</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Variations</a>
+                                <ul>
+                                    <li><a href="product-sticky-tab.html">Sticky Tabs</a></li>
+                                    <li><a href="product-simple.html">Simple Product</a></li>
+                                    <li><a href="product-sidebar-left.html">With Left Sidebar</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Product Layout Types</a>
+                                <ul>
+                                    <li><a href="product.html">Default Layout</a></li>
+                                    <li><a href="product-extended-layout.html">Extended Layout</a></li>
+                                    <li><a href="product-full-width.html">Full Width Layout</a></li>
+                                    <li><a href="product-grid-layout.html">Grid Images Layout</a></li>
+                                    <li><a href="product-sticky-both.html">Sticky Both Side Info<span class="tip tip-hot">Hot!</span></a></li>
+                                    <li><a href="product-sticky-info.html">Sticky Right Side Info</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Pages<span class="tip tip-hot">Hot!</span></a>
+                        <ul>
+                            <li><a href="cart.html">Shopping Cart</a></li>
+                            <li>
+                                <a href="#">Checkout</a>
+                                <ul>
+                                    <li><a href="checkout-shipping.html">Checkout Shipping</a></li>
+                                    <li><a href="checkout-shipping-2.html">Checkout Shipping 2</a></li>
+                                    <li><a href="checkout-review.html">Checkout Review</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="#" class="login-link">Login</a></li>
+                            <li><a href="forgot-password.html">Forgot Password</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="blog.html">Blog</a>
+                        <ul>
+                            <li><a href="single.html">Blog Post</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Special Offer!<span class="tip tip-hot">Hot!</span></a></li>
+                    <li><a href="#">Buy Porto!</a></li>
+                </ul>
+            </nav><!-- End .mobile-nav -->
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank"><i class="icon-facebook"></i></a>
+                <a href="#" class="social-icon" target="_blank"><i class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank"><i class="icon-instagram"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <a id="scroll-top" href="#top" title="Top" role="button"><i class="icon-angle-up"></i></a>
+
+    <!-- Plugins JS File -->
+    <script type="text/javascript" src="/jquery/jquery.min.js"></script>    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script type="text/javascript" src="/bootstrap/bootstrap.min.js"></script> <!-- bootstrap js -->
+    <script type="text/javascript" src="/bootstrap/bootstrap.bundle.min.js"></script> <!-- bootstrap bundle js -->
+
+    <!-- <script src="/js/bootstrap.bundle.min.js"></script> -->
+    <script src="/js/common/porto/plugins.min.js"></script>
+
+    <!-- tui editor -->
+    <!-- tui editor dependencies -->
+    <script src="/tui-edit-dpn/markdown-it.js"></script>
+    <script src="/tui-edit-dpn/to-mark.js"></script>
+    <script src="/tui-edit-dpn/tui-code-snippet.js"></script>
+    <script src="/tui-edit-dpn/codemirror.js"></script>
+    <script src="/tui-edit-dpn/highlight.pack.js"></script>
+    <script src="/tui-edit-dpn/squire-raw.js"></script>
+    <!-- tui editor dependencies -->
+
+    <!-- tui editor default -->
+    <script src="/tui-editor/tui-editor-Editor.js"></script>
+
+    <!-- Viewer -->
+    <!-- <script src="/tui-editor/tui-editor-Viewer.js"></script> -->
+
+    <!-- table extention -->
+    <script src="/tui-editor/tui-editor-extTable.js"></script>
+
+    <!-- uml extention -->
+    <script src="/tui-uml/plantuml-encoder.js"></script>
+    <script src="/tui-editor/tui-editor-extUML.js"></script>
+
+    <!-- chart extention -->
+    <script src="/tui-chart/raphael.js"></script>
+    <script src="/tui-chart/tui-chart-polyfill.js"></script>
+    <script src="/tui-editor/tui-editor-extChart.js"></script>
+    
+    <!-- tui editor color -->
+    <script src="/tui-color-picker/tui-color-picker.js"></script>
+    <script src="/tui-editor/tui-editor-extColorSyntax.js"></script>
+    <!-- tui editor color -->
+
+    <!-- scrollSync extention -->
+    <script src="/tui-editor/tui-editor-extScrollSync.js"></script>
+    <!-- tui editor -->
+
+    <!-- include summernote css/js -->
+    <script src="/js/common/summernote/summernote.js"></script>
+    <script src="/js/common/summernote/lang/summernote-ko-KR.js"></script> 
+
+    
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>  -->
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
+
+    <!-- include summernote css/js -->
+
+    <!-- Main JS File -->
+    <script src="/js/common/porto/main.js"></script>
+
+    <script type="text/javascript" src="/js/common/includeHTML.js"></script>	<!-- includeHTML js -->
+    <script type="text/javascript" src="/js/common/ajax.js"></script>		<!-- join user js -->
+    <script type="text/javascript" src="/js/common/urlParameter.js"></script>		<!-- url parameter js -->
+    <script type="text/javascript" src="/js/common/filterArray.js"></script>	<!-- cookies function -->
+    <script type="text/javascript" src="/js/common/cookies.js"></script>	<!-- cookies function -->
+    <!-- <script type="text/javascript" src="/js/web/common/header.js"></script> -->		<!-- header js -->
+    <script type="text/javascript" src="/js/web/board/b_write_board.js"></script>		<!-- write board js -->
+    <script>includeHTML();</script> 	<!--HTML include functon 호출-->
+
+    <script type="text/javascript">
+        $(function(){
+            /* var editor = new tui.Editor({
+                el: document.querySelector('#editSection'),
+                //initialEditType: 'wysiwyg',
+                initialEditType: 'markdown',
+                previewStyle: 'vertical',
+                height: '500px',
+                exts: [
+                    {
+                        name: 'chart',
+                        minWidth: 100,
+                        maxWidth: 600,
+                        minHeight: 100,
+                        maxHeight: 300
+                    },
+                    'scrollSync',
+                    'colorSyntax',
+                    'uml',
+                    'mark',
+                    'table'
+                ],
+                codeBlockLanguages: ['ruby', 'PHP', 'javascript']
+            });  */
+
+           
+        });
+    </script>
+</body>
+</html>
