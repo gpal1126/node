@@ -1,17 +1,16 @@
 $(function(){
     
-    let bcId = getUrlParameter('bcId');
+    //let bcId = getUrlParameter('bcId');
+    let bcId = parseInt(location.href.substring(location.href.lastIndexOf('/')+1));
     console.log('bcId:::'+bcId);
 
-    let url = '/d_board/insertBoardId';
-    let json = { 'bcId':bcId };
-    let data = json;
-    let bId = ajax.createJsonData(url, data);
-    console.log('bId:::'+bId);
-    sessionStorage.setItem('bId', bId);
-    //bId = sessionStorage.getItem('bId');
+    let url;
+    let json;
+    let data;
 
     url = '/admin/d_board_cat/selectBoardByBCId';
+    json = { 'bcId':bcId };
+    data = json;
     boardCatInfo = ajax.readData(url, data);
     console.log(boardCatInfo)
     let bcName = boardCatInfo.bcName;
@@ -27,11 +26,24 @@ $(function(){
         $('.hidden-box').css({'display': 'none'});
     }
 
+    //sessionStorage에 담겨있는 bId
+    url = '/d_board/boards/bcId/'+bcId;
+    json = { 'bcId':bcId };
+    data = json;
+    let bId = ajax.createJsonData(url, data);
+    console.log('bId:::'+bId);
+    sessionStorage.setItem('bId', bId);
+
+    function sleep(delay) {
+        var start = new Date().getTime();
+        while (new Date().getTime() < start + delay);
+      }
+
     /* 그래도 나가시겠습니까 경고창 */
     let warning = true;
     window.onbeforeunload = function() { 
     //$(window).on('beforeunload', function() { 
-        console.log('warning:::'+warning);
+    //window.addEventListener('beforeunload', async function (e) {
         if( warning ){
             return 'out';
         }else {
@@ -41,6 +53,8 @@ $(function(){
 
     /* 페이지 벗어날 경우 */
     $(window).on('unload', function() { 
+        console.log('warning:::'+warning);
+        
         if( warning ){
             let fileArr = fileItems.items();
             console.log(fileArr.length);
@@ -51,18 +65,53 @@ $(function(){
                     let fileName = fileArr[i].fileName;
                     let filePath = fileDir+fileName;
                     console.log('filePath:::'+filePath);
-                    deleteFile(filePath);
+                    let url = '/d_b_file/deleteFile';
+                    let json = { 'filePath': filePath };
+
+                    let data = json;
+                    $.ajax({
+                        url: url,
+                        async: false,
+                        type: 'DELETE',
+                        data: data,
+                        //dataType: 'json',
+                        /* success: function(data){
+                            console.log('파일 삭제');
+                            console.log(data);
+                        }, */
+                    }).done(function(data) {
+                        console.log('end');
+                    });
+
+                    //await deleteFile(filePath);
                 }
             }
 
+            let bId = sessionStorage.getItem('bId');
             let json = { 'bcId':bcId, 'bId':bId };
             console.log( json );
             let url = '/d_board/deleteEmptyBoard';
             let data = json;
-            let deleteRst = ajax.deleteData(url, data);
-            
+            $.ajax({
+                url: url,
+                async: false,
+                type: 'DELETE',
+                data: data,
+                //dataType: 'json',
+                /* success: function(data){
+                    console.log('게시판 id 삭제');
+                    console.log(data);
+                }, */
+            }).done(function(data) {
+                console.log('end');
+            });
+
+            //let deleteRst = await ajax.deleteData(url, data);
+            //console.log(deleteRst);
             fileItems.clear();
             removeCookie(fileItems);
+            
+            //sleep(5000);
         }else {
 
             fileItems.clear();
@@ -70,7 +119,7 @@ $(function(){
 
             return false;
         }
-    });
+    }); 
 
     // file arr cookie 선언
     let fileItems = new cookieList("fileItems");
@@ -181,8 +230,7 @@ $(function(){
             contents = contents.replace(rst, replaceFile);
         }
 
-        //sessionStorage에 담겨있는 bId
-        //bId = sessionStorage.getItem('bId');
+        bId = sessionStorage.getItem('bId');
 
         //숨김 여부
         let hiddenStatus = $('#hiddenStatus').is(':checked');
@@ -194,7 +242,7 @@ $(function(){
 
         let json = { 'bId':bId, 'title':title, 'contents':contents, 'hiddenStatus':hiddenStatus };
         console.log( json );
-        let url = '/d_board/writeBoard';
+        let url = '/d_board/boards';
         let data = json;
         let boardInfo = ajax.createJsonData(url, data);
         console.log(boardInfo);
@@ -229,7 +277,7 @@ $(function(){
             data = json;
             insertFileRst = ajax.createJsonData(url, data);
             if( insertFileRst === 1 ){
-                location.href = '/board/list?bcId='+bcId;
+                location.href = '/board/list/'+bcId;
             }
         }
         
@@ -237,11 +285,13 @@ $(function(){
 
     /* 게시글 취소 버튼 클릭 */
     $('.board-form #cancel').on('click', function(){
-        location.href = '/board/list?bcId='+bcId;
+        location.href = '/board/list/'+bcId;
     });
 
     /* 파일 업로드 func */
     function sendFile(file, editor, welEditable) {
+
+        let bId = sessionStorage.getItem('bId');
         
         const fd = new FormData();
         console.log('sendFile:::bcId:::'+bcId);
@@ -251,9 +301,8 @@ $(function(){
         fd.append('fileDirType', 'board');  //업로드할 파일 경로
         fd.append('file', file);
 
-        let url = '/d_b_file/uploadFile';
-        //let type = 'POST';
-        let data = fd;
+        url = '/d_b_file/uploadFile';
+        data = fd;
         
         let fileRst = ajax.createFormData(url, data);
         console.log(fileRst);
@@ -270,7 +319,7 @@ $(function(){
     }
 
     /* 파일 삭제 func */
-    function deleteFile(filePath) {
+    async function deleteFile(filePath) {
         console.log(filePath);
         let url = '/d_b_file/deleteFile';
         let json = { 'filePath': filePath };
@@ -278,7 +327,7 @@ $(function(){
         //let type = 'POST';
         let data = json;
         
-        deleteFileRst = ajax.deleteData(url, data);
+        deleteFileRst = await ajax.deleteData(url, data);
         console.log(deleteFileRst);
     }
 });

@@ -5,6 +5,8 @@
 //const User = require('../models').User;  //스키마 연결
 
 const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 const { Board } = require('../models');  //스키마 연결
 const { BoardCat } = require('../models');  //스키마 연결
 const { BFile } = require('../models');  //스키마 연결
@@ -47,7 +49,9 @@ const listBoardCat = function(req, res){
 const listBoard = async function(req, res){
     try {
 
-        const bcId = req.query.bcId;
+        let bcId = req.query.bcId;
+        console.log('게시판 리스트 bcId:::'+bcId);
+        bcId = req.params.bcId;
         console.log('게시판 리스트 bcId:::'+bcId);
 
         let boardCatInfo = (await BoardCat.findAll({
@@ -75,6 +79,7 @@ const listBoard = async function(req, res){
                 where: { 
                     board_cat_id: bcId,
                     user_id: userId,
+                    title: { [Op.ne]: null },
                     deleted: 0,
                 }
             }));
@@ -144,6 +149,7 @@ const listBoard = async function(req, res){
                 attributes: [ 'board_id', 'user_id', 'type', 'title', 'contents', 'id', 'name', 'views', 'hidden_status', [Sequelize.fn('date_format', Sequelize.col('reg_date'), '%Y.%m.%d %H:%i'), 'reg_date'] ],
                 where: { 
                     board_cat_id: bcId,
+                    title: { [Op.ne]: null },
                     deleted: 0,
                 }
             }))
@@ -226,7 +232,8 @@ const listBoard = async function(req, res){
 /* 게시글 id insert */
 const insertBoardId = function(req, res){
     try {
-        const boardCatId = req.body.bcId;
+        let boardCatId = req.body.bcId;
+        boardCatId = req.params.bcId;
         let userId;
         if( req.user !== undefined ){   //임시 방편
             userId = req.user.user_id;
@@ -322,7 +329,7 @@ const deleteEmptyBoard = function(req, res){
 
         //console.log(req.body);
         let boardId = req.body.bId;
-
+        console.log('삭제할 bId:::'+bId);
         Board.destroy({
             where: { board_id: boardId }
         }).then( rst => {
@@ -347,7 +354,8 @@ const selectBoardById = function(req, res){
     try {
 
         //console.log(req.body);
-        let boardId = req.query.bId;
+        //let boardId = req.query.bId;
+        let boardId = req.params.bId;
         console.log('boardId:::'+boardId);
         Board.findOne({
             where: { 
@@ -420,7 +428,8 @@ const updateViews = async function(req, res){
 /* 게시글 수정 */
 const updateBoard = function(req, res){
     try {
-        let boardId = req.body.bId;
+        //let boardId = req.body.bId;
+        let boardId = req.params.bId;
         let type = req.body.type;
         if( type === '' ){
             type = null;
@@ -460,7 +469,8 @@ const updateBoard = function(req, res){
 /* 게시글 삭제 */
 const deleteBoard = function(req, res){
     try {
-        let boardId = req.body.bId;
+        //let boardId = req.body.bId;
+        let boardId = req.params.bId;
 
         Board.update({
             deleted: 1,

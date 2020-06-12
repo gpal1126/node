@@ -1,6 +1,7 @@
 $(function(){
 
     let bcId = parseInt(getUrlParameter('bcId'));
+    bcId = parseInt(location.href.substring(location.href.lastIndexOf('/')+1));
     console.log('bcId:::'+bcId);
     let url = '/admin/d_board_cat/selectBoardByBCId';
     let json = { 'bcId': bcId };
@@ -39,8 +40,8 @@ $(function(){
 
     $('.b-title').html(bcName);
 
-    url = '/d_board/listBoard';
     json = { 'bcId': bcId };
+    url = '/d_board/boards/bcId/'+bcId;
     data = json;
     let listRst = ajax.readData(url, data);
     console.log(listRst);
@@ -168,7 +169,9 @@ $(function(){
                 let regdate = listInfo[i].regdate;
                 let id = listInfo[i].id;
                 console.log(id)
-                id = textLengthOverCut(id, 4, '*');
+                if( id !== null ){
+                    id = textLengthOverCut(id, 4, '*');
+                }
                 let replyLeng = listInfo[i].replyLeng;
                 let bImg = listInfo[i].bImg;
                 let imgLeng = listInfo[i].imgLeng;
@@ -259,13 +262,13 @@ $(function(){
             const bId = $('#bId'+no).val();
             setCookie('bcId', bcId);
             setCookie('bId', bId);
-            location.href = '/board/detail?bcId='+bcId;
+            location.href = '/board/detail/'+bcId;
         }
     });
 
     /* 글쓰기 */
     $('#writeBtn').on('click', function(){
         setCookie('bcId', bcId);
-        location.href = '/board/writeBoard?bcId='+bcId;
+        location.href = '/board/writeBoard/'+bcId;
     });
 });

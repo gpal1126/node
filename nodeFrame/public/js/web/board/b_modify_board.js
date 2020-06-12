@@ -1,6 +1,7 @@
 $(function(){
 
-    let bcId = getUrlParameter('bcId');   //board 카테고리 id
+    //let bcId = getUrlParameter('bcId');   //board 카테고리 id
+    let bcId = parseInt(location.href.substring(location.href.lastIndexOf('/')+1));
     console.log('bcId:::'+bcId);
     let json = { 'bcId': bcId };
     let data = json;
@@ -19,9 +20,9 @@ $(function(){
 
     let bId = getCookie('bId'); //board id
     console.log('bId:::'+bId);
-    json = { 'bId': bId };
-    data = json;
-    url = '/d_board/detailBoard';
+    //json = { 'bId': bId };
+    data = null;
+    url = '/d_board/boards/bId/'+bId;
     let boardInfo = ajax.readData(url, data);
     console.log(boardInfo);
     let title = boardInfo.title;
@@ -219,18 +220,18 @@ $(function(){
 
         json = { 'bId':bId, 'title':title, 'contents':contents, 'hiddenStatus':hiddenStatus };
         console.log( json );
-        url = '/d_board/modifyBoard';
+        url = '/d_board/boards/bId/'+bId;
         data = json;
         let boardInfo = ajax.updateData(url, data);
         console.log(boardInfo);
         if( boardInfo === 1 ){
-            location.href = '/board/list?bcId='+bcId;
+            location.href = '/board/list/'+bcId;
         }
     });
 
     /* 게시글 취소 버튼 클릭 */
     $('.board-form #cancel').on('click', function(){
-        location.href = '/board/list?bcId='+bcId;
+        location.href = '/board/list/'+bcId;
     });
 
     /* 파일 업로드 func */

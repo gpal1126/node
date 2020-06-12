@@ -15,12 +15,12 @@ const mdlwrLogged = require('../../passport/mdlwrLogged');
 ***/
 
 /* GET users listing. */
-router.get('/:id', async function(req, res, next){    //로그인 여부에 따라 접근 가능한 페이지 미들웨어 func
+router.get('/:bType/:bcId', async function(req, res, next){    //로그인 여부에 따라 접근 가능한 페이지 미들웨어 func
 
     //세션 체크
     mdlwrLogged.sessionChk(req, res, next);
 
-    const urlParamId = req.params.id;  //넘어온 url id    
+    const urlParamId = req.params.bType;  //넘어온 url id    
     console.log('로그인 여부에 따라 접근 가능한 페이지 미들웨어 func');
     console.log('urlParamId:::'+urlParamId);
 
@@ -33,6 +33,7 @@ router.get('/:id', async function(req, res, next){    //로그인 여부에 따�
     console.log('userType::::'+userType);
 
     let boardCatId = parseInt(req.query.bcId);
+    boardCatId = parseInt(req.params.bcId);
 
     //board user id
     let bUId;
@@ -67,6 +68,7 @@ router.get('/:id', async function(req, res, next){    //로그인 여부에 따�
         console.log('rst::::');
         //console.log(rst)
         var boardCatId = parseInt(rst.board_cat_id);
+        console.log('boardCatId:::'+boardCatId);
         const bcName = rst.b_c_name;
         const writeAuth = parseInt(rst.write_auth);
         const readAuth = parseInt(rst.read_auth);
@@ -78,7 +80,7 @@ router.get('/:id', async function(req, res, next){    //로그인 여부에 따�
         const regdate = rst.reg_date;
         
         //리스트 
-        if( urlParamId === 'list' ){
+        if( urlParamId == 'list' ){
             if( readAuth === 3 ){ //본인
                 //로그인 체크
                 if( !req.user ){
@@ -174,9 +176,11 @@ router.get('/:id', async function(req, res, next){    //로그인 여부에 따�
     });
 
 }, function(req, res) {
-    const urlParamId = req.params.id;  //넘어온 url id
+    const urlParamId = req.params.bType;  //넘어온 url id
+    const bcId = req.params.bcId;  //넘어온 url id
     console.log('페이지 이동 func');
     console.log('urlParamId:::'+urlParamId);
+    console.log('bcId:::'+bcId);
 
     let deviceType = req.device.type.toUpperCase(); //device type
     console.log('deviceType::::::::::::::::::::::::::::::::::::::'+deviceType);
@@ -202,9 +206,9 @@ router.get('/:id', async function(req, res, next){    //로그인 여부에 따�
 
     //Object.entries(objUrlId) : 객체 -> 배열
     fileName = Object.entries(objUrlId).find(function(v){   //객체를 배열로 변환하여 찾음
-        //console.log(v[0]);    //index 0은 urlParamId
+        console.log(v[0]);    //index 0은 urlParamId
         //console.log(v[1]);    //index 1은 파일명
-        return v[0] === urlParamId;  //배열 값과 넘어온 urlParamId 값과 비교
+        return v[0] == urlParamId;  //배열 값과 넘어온 urlParamId 값과 비교
     })[1];
 
     console.log('fileName:::'+fileName);

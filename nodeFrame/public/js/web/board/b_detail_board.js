@@ -11,7 +11,8 @@ $(function(){
         console.log('sUId:::'+sUId);
     }
 
-    let bcId = getUrlParameter('bcId');
+    //let bcId = getUrlParameter('bcId');
+    let bcId = parseInt(location.href.substring(location.href.lastIndexOf('/')+1));
     console.log('bcId:::'+bcId)
     let url = '/admin/d_board_cat/selectBoardByBCId';
     let json = { 'bcId': bcId };
@@ -31,9 +32,9 @@ $(function(){
     //ajax.updateData(url, data);
 
     /* 게시글 조회 */
-    url = '/d_board/detailBoard';
-    json = { 'bId':bId };
-    data = json;
+    url = '/d_board/boards/bId/'+bId;
+    //json = { 'bId':bId };
+    data = null;
     let boardInfo = ajax.readData(url, data);
     console.log(boardInfo);
     let uId = boardInfo.uId;
@@ -60,18 +61,18 @@ $(function(){
 
     /* 수정 버튼 클릭 */
     $('#modifyBtn').on('click', function(){
-        location.href = '/board/modifyBoard?bcId='+bcId;
+        location.href = '/board/modifyBoard/'+bcId;
     });
 
     /* 삭제 버튼 클릭 */
     $('#deleteBtn').on('click', function(){
         if( confirm('게시글을 삭제하시겠습니까?') ){
-            url = '/d_board/deleteBoard';
-            json = { 'bId':bId };
-            data = json;
+            url = '/d_board/boards/bId/'+bId;
+            //json = { 'bId':bId };
+            data = null;
             let boardInfo = ajax.deleteData(url, data);
             if( boardInfo === 1 ){
-                location.href = '/board/list?bcId='+bcId;
+                location.href = '/board/list/'+bcId;
             }
         }else {
             return false;
@@ -80,7 +81,7 @@ $(function(){
 
     /* 목록 버튼 클릭 */
     $('#listBtn').on('click', function(){
-        location.href = '/board/list?bcId='+bcId;
+        location.href = '/board/list/'+bcId;
     });
 
     /*** 댓글 여부 ***/
@@ -262,7 +263,7 @@ $(function(){
         console.log(insertReply);
         if( insertReply === 1 ){
             console.log('등록완료?')
-            location.href = '/board/detail?bcId='+bcId;
+            location.href = '/board/detail/'+bcId;
         }
     });
 
@@ -382,7 +383,7 @@ $(function(){
         console.log(insertReply);
         if( insertReply === 1 ){
             console.log('등록완료?')
-            location.href = '/board/detail?bcId='+bcId;
+            location.href = '/board/detail/'+bcId;
         }
     });
 
@@ -430,7 +431,7 @@ $(function(){
             console.log(deleteReply);
             if( deleteReply === 1 ){
                 console.log('삭제완료?')
-                location.href = '/board/detail?bcId='+bcId;
+                location.href = '/board/detail/'+bcId;
             }
         }else {
             return false;
@@ -456,7 +457,7 @@ $(function(){
         console.log(updateReply);
         if( updateReply === 1 ){
             console.log('수정완료?')
-            location.href = '/board/detail?bcId='+bcId;
+            location.href = '/board/detail/'+bcId;
         }
     });
 
