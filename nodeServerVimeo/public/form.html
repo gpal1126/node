@@ -1,0 +1,44 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>email form</title>
+</head>
+<body>
+    <form action="/email/form" method="post">
+        email: <input type="text" name="email"><br/>
+        <input type="submit">
+    </form>
+    <button class="ajaxsend">ajaxsend</button>
+
+    <div class="result"></div>
+
+    <script>
+        document.querySelector('.ajaxsend').addEventListener('click', function(){
+            let inputData = document.forms[0].elements[0].value;
+            console.log(inputData)
+            sendAjax('http://localhost:3000/email/ajax', inputData);
+        });
+
+        function sendAjax(url, data){
+            var json = {'email': data};
+            json = JSON.stringify(json);
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-Type', "application/json");
+            xhr.send(json);
+
+            xhr.addEventListener('load', function(){
+                //check validation about input value => select db
+                let result = JSON.parse(xhr.responseText);
+                //console.log(result);
+                let resultDiv = document.querySelector('.result');
+                if( result.result !== 'ok' ) resultDiv.innerHTML = 'your email is not found';
+                else resultDiv.innerHTML = result.name;
+                
+            });
+        }
+    </script>
+</body>
+</html>
