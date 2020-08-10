@@ -42,3 +42,24 @@ URL                 Methods     설명
 /movies/:title      DELETE      해당 title 영화 삭제
 /movies/:title      PUT         해당 title 영화 수정
 /movies?min=9       GET         상영중인 영화리스트(필터조건)
+
+  
+### 유저, 영화 테이블 
+```
+-- 유저 테이블
+CREATE TABLE USER_TB(
+    user_id int(11) AUTO_INCREMENT PRIMARY KEY COMMENT '유저 인덱스',
+    email varchar(50) COMMENT '이메일',
+    pw varchar(100) COMMENT '패스워드',
+    name varchar(20) COMMENT '이름'
+);
+
+-- 영화 테이블
+CREATE TABLE MOVIE_TB(
+    id int(11) AUTO_INCREMENT PRIMARY KEY COMMENT '영화 인덱스',
+    title varchar(100) COMMENT '제목',
+    type varchar(50) COMMENT '장르',
+    grade double COMMENT '평점',
+    actor varchar(50) COMMENT '배우'
+);
+```

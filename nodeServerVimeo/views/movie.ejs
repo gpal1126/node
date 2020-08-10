@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie list</title>
+
+    <link rel="stylesheet" href="/css/ui.css">
 </head>
 <body>
     <h1>movie list</h1>
@@ -84,26 +86,39 @@
                     url = '/movie';
                     method = 'POST';
                     let inputs = [].slice.call(document.querySelector('form').elements);
+                    console.log(inputs);
                     data = inputs.reduce(function(pre, next) {
+                        console.log(pre, next);
                         pre[next.name] = next.value;
                         return pre;
                     }, {});
+
+                    fn = function(result) {
+                        if( result.result === 1 ) showResult.innerHTML = '새로운 영화 데이터가 잘 추가 됐습니다.';
+                        else showResult.innerHTML = "list not found";
+                    }
                     break;
                 case 'get_id':
-                    url = '/movie/:'+li.getElementsByTagName('input')[0].value;
+                    console.log('get_id???')
+                    url = '/movie/'+li.getElementsByTagName('input')[0].value;
                     method = 'GET';
                     fn = function(result){
                         if( result.result === 1 ){
-                            showResult.innerHTML = result.data;
+                            console.log(result.data[0])
+                            showResult.innerHTML = result.data[0].actor;
+                        }else {
+                            showResult.innerHTML = '해당하는 영화가 없습니다.';
                         }
                     }
                     break;
                 case 'delete_id':
-                    url = '/movie/:'+li.getElementsByTagName('input')[0].value;
+                    url = '/movie/'+li.getElementsByTagName('input')[0].value;
                     method = 'DELETE';
                     fn = function(result) {
                         if( result.result === 1 ){
-                            showResult.innerHTML = '선택한 영화가 잘 삭제됐습니다.';
+                            showResult.innerHTML = '선택한 영화 '+result.data+'가 잘 삭제됐습니다.';
+                        }else {
+                            showResult.innerHTML = '해당 영화가 없습니다.';
                         }
                     }
                     break;
@@ -112,7 +127,7 @@
                     console.log('default');
                     break;
             }
-            sendAjax('http://localhost:3000/movie', method, data, showResult);
+            sendAjax(url, method, data, showResult);
         });
 
         //@data : json format.
@@ -131,21 +146,9 @@
             
             xhr.addEventListener('load', function(){
                 const result = JSON.parse(xhr.responseText);
-                console.log( 'result:::' );
-                console.log( result );
-                if( result.result === 1 ){
-                    if( !result.data ){
-                        resultEle.innerHTML = '새로운 영화 데이터가 잘 추가됐습니다.';
-                    }else {
-                        let titles = result.data.reduce(function(pre, next){
-                            pre += '<li>'+next.title+'</li>';
-                            return pre;
-                        }, '');
-                        resultEle.innerHTML = '<ul>'+titles+'</ul>';
-                    }
-                }else {
-                    resultEle.innerHTML = 'list not found';
-                }
+                
+                fn(result);
+
             });
         }
     </script>

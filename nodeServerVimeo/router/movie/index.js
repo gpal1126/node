@@ -54,4 +54,41 @@ router.post('/', function(req, res){
     });
 });
 
+// 3. /movie/:title, GET
+router.get('/:title', function(req, res){
+    let title = req.params.title;
+    //console.log('title:::'+title);
+    let responseData = {};
+
+    let query = conn.query('SELECT * FROM MOVIE_TB WHERE title=?', [title], function(err, rows){
+        if( err ) throw err;
+        if( rows[0] ){
+            responseData.result = 1;
+            responseData.data = rows;
+        }else {
+            responseData.result = 0;
+        }
+        res.json(responseData);
+    });
+});
+
+// 4. /movie/:title, POST
+router.delete('/:title', function(req, res){
+    let title = req.params.title;
+
+    let responseData = {};
+
+    let query = conn.query('DELETE FROM MOVIE_TB WHERE title=?' ,title, function(err, rows){
+        if( err ) throw err;
+        console.log('row is =>', rows);
+        if( rows.affectedRows > 0 ){
+            responseData.result = 1;
+            responseData.data = title;
+        }else {
+            responseData.result = 0;
+        }
+        res.json(responseData);
+    });
+});
+
 module.exports = router;
