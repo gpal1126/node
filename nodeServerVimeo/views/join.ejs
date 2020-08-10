@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <style>
+        .messages {
+            margin-bottom: 16px;
+            color: #963b3b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Join my website!</h1>
+    <section class="messages"><%= message %></section>
+    <form action="/join" method="post">
+        email: <input type="text" name="email"><br/>
+        password: <input type="password" name="password"></br/>
+        <input type="submit">
+    </form>
+</body>
+</html>

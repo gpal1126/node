@@ -24,13 +24,14 @@ router.get('/', function(req, res){
     let msg;
     let errMsg = req.flash('error');
     if( errMsg ) msg = errMsg;
-    res.render('join.ejs', {'message': msg});
+    res.render('login.ejs', {'message': msg});
 });
 
 // passport.serialize
 passport.serializeUser(function(user, done){
+    console.log(user);
     console.log('passport session save : ', user.id);
-    done(null, user.id);
+    done(null, id);
 });
 
 passport.deserializeUser(function(id, done){
@@ -38,34 +39,37 @@ passport.deserializeUser(function(id, done){
     done(null, id);
 });
 
-passport.use('local-join', new LocalStrategy({
+passport.use('local-login', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true,
     }, function(req, email, password, done){
-        console.log('local-join callback called');
+        console.log('local-login callback called');
         let query = conn.query('SELECT * FROM USER_TB WHERE email=?', [email], function(err, rows){
             if( err ) return done(err);
-
+            console.log(rows.length);
             if( rows.length ){
                 console.log('existed user');
-                return done(null, false, {message: 'your email is alread used'});
+                return done(null, { 'email': email, 'id': rows[0].user_id });
             }else {
-                let sql = { email: email, pw: password };
-                let query = conn.query('INSERT INTO USER_TB SET ? ', sql, function(err, rows){
-                    if( err ) throw err;
-                    return done(null, { 'email': email, 'id': rows.insertId });
-                });
+                console.log('no existed user');
+                return done(null, false, {'message':'your login info is not found'});
             }
         });
     }
 ));
 
-router.post('/', passport.authenticate('local-join', {
-   successRedirect: '/main', 
-   failureRedirect: '/join',
-   failureFlash: true, })
-);
+router.post('/', function(req, res, next){
+    passport.authenticate('local-login', function(err, user, info){
+        if( err ) res.status(500).json(err);
+        if( !user ) return res.status(401).json(info.message);
+
+        req.logIn(user, function(err){
+            if( err ) return next(err);
+            return res.json(user);
+        });
+    })(req, res, next);
+});
 
 // POST
 /* router.post('/', function(req, res){

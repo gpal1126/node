@@ -6,10 +6,10 @@ const mysql = require('mysql');
 
 // DATABASE SETTING
 const conn = mysql.createConnection({
-    host: 'localhost',
+    host: '211.253.31.56',
     port: 3306,
-    user: 'root', 
-    password: '1234',
+    user: 'lindas', 
+    password: 'Wlstns676@!',
     database: 'test',
 });
 
